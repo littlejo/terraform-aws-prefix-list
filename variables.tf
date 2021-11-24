@@ -22,10 +22,6 @@ variable "max_entries" {
 variable "entries" {
   description = "entries"
   type        = map(any)
-  validation {
-    condition     = length(var.entries) <= var.max_entries
-    error_message = "ERROR valid values: number of entries is superior of max_entries"
-  }
 }
 
 variable "tags" {
