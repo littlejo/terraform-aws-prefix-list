@@ -21,7 +21,12 @@ variable "max_entries" {
 
 variable "entries" {
   description = "entries"
-  type        = map(any)
+  type        = map(string)
+  validation {
+    condition = alltrue([for cidr in keys(var.entries) : true
+    if can(cidrhost(cidr, 0))])
+    error_message = "ERROR invalid values of cidr entries"
+  }
 }
 
 variable "tags" {
